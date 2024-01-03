@@ -5,6 +5,7 @@ import (
     "github.com/spf13/cobra"
     "github.com/dalecosta1/sinaloa-cli/cmd/net"
     "github.com/dalecosta1/sinaloa-cli/cmd/info"
+    "github.com/dalecosta1/sinaloa-cli/cmd/api"
 )
 
 var rootCmd = &cobra.Command{
@@ -23,6 +24,7 @@ func Execute() {
 func addSubcommandPalettes() {
     rootCmd.AddCommand(net.NetCmd)
     rootCmd.AddCommand(info.InfoCmd)
+    rootCmd.AddCommand(api.ApiCmd)
 }
 
 func init() {
