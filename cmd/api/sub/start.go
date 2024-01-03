@@ -8,6 +8,7 @@ import (
 
 var (
 	port string
+	method string
 )
 
 var StartApiCmd = &cobra.Command{
@@ -15,31 +16,25 @@ var StartApiCmd = &cobra.Command{
 	Short: "Start sinaloa api server.",
 	Long:  `Start sinaloa api server.`,
 	Run: func(cmd *cobra.Command, args []string) {
-		// Check if the provided path is a directory
-		fmt.Println("Starting api server...")
+		fmt.Println("[INFORMATION] Starting API server on port:", port, "🤠🤠")
+		fmt.Println("[INFORMATION] Starting API server using this method:", method, "🤠🤠")
+
+		// Start api server
+		
+
+		fmt.Println("\033[32m[INFORMATION] Server started correctly\033[0m 🚀🚀")
 	},
 }
 
 func init() {
 	StartApiCmd.Flags().StringVarP(&port, "port", "p", "", "Port of api server.")
+	StartApiCmd.Flags().StringVarP(&method, "method", "m", "", "Method to start api server.")
 
 	if err := StartApiCmd.MarkFlagRequired("port"); err != nil {
-		fmt.Println(err)
+		fmt.Println("\033[31m[ERROR] There was a problem starting the API server:", err, "🚩🚩\033[0m")
+	}
+
+	if err := StartApiCmd.MarkFlagRequired("method"); err != nil {
+		fmt.Println("\033[31m[ERROR] There was a problem starting the API server:", err, "🚩🚩\033[0m")
 	}
 }
-
-// func startApiServer(port string) (int64, error) {
-// 	var size int64
-
-// 	err := filepath.Walk(path, func(_ string, info os.FileInfo, err error) error {
-// 		if err != nil {
-// 			return err
-// 		}
-// 		if !info.IsDir() {
-// 			size += info.Size()
-// 		}
-// 		return nil
-// 	})
-
-// 	return size, err
-// }

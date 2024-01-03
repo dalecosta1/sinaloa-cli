@@ -1,8 +1,6 @@
 package api
 
 import (
-	"fmt"
-
 	"github.com/spf13/cobra"
 	"github.com/dalecosta1/sinaloa-cli/cmd/api/sub" // Import the sub package
 )
