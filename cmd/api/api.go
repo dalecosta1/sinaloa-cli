@@ -8,8 +8,8 @@ import (
 // apiCmd represents the api command
 var ApiCmd = &cobra.Command{
 	Use:   "api",
-	Short: "This command is used to start and manage the api server. Starting api server all command of the cli will be available via api.",
-	Long: `This command is used to start and manage the api server. Starting api server all command of the cli will be available via api.`,
+	Short: "This command is used to start and manage the api server",
+	Long: `This command is used to start and manage the api server. Starting api server all commands of the cli will be available via api`,
 	Run: func(cmd *cobra.Command, args []string) {
 		cmd.Help()
 	},

@@ -13,8 +13,8 @@ var (
 
 var StartApiCmd = &cobra.Command{
 	Use:   "start",
-	Short: "Start sinaloa api server.",
-	Long:  `Start sinaloa api server.`,
+	Short: "Start sinaloa api server",
+	Long:  `Start sinaloa api server. This allow you to use all commands of the cli via api. Example: sinaloa api start -p 8080 -m all|haproxy|dim`,
 	Run: func(cmd *cobra.Command, args []string) {
 		fmt.Println("[INFORMATION] Starting API server on port:", port, "🤠🤠")
 		fmt.Println("[INFORMATION] Starting API server using this method:", method, "🤠🤠")

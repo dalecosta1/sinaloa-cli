@@ -1,10 +1,14 @@
-package sub  // Make sure this matches the directory structure
+package sub
 
 import (
+    "encoding/json"
     "fmt"
+    "net"
     "net/http"
     "time"
     "github.com/spf13/cobra"
+    "github.com/dalecosta1/sinaloa-cli/models/messages/errors"
+    "github.com/dalecosta1/sinaloa-cli/models/messages/response"
 )
 
 var urlPath string
@@ -14,19 +18,48 @@ var client = &http.Client{
 
 var PingCmd = &cobra.Command{
     Use:   "ping",
-    Short: "A brief description of your command",
-    Long:  ``,
+    Short: "This command is used to ping a url or an ip address",
+    Long:  `This command is used to ping a url or an ip address. Return 200 if ping it is ok otherwise error. Example: sinaloa net ping -u google.com`,
     Run: func(cmd *cobra.Command, args []string) {
-        if resp, err := ping(urlPath); err != nil {
-            fmt.Println(err)
+        if statusCode, err := ping(urlPath); err != nil {
+            errorMessage := fmt.Sprintf("Ping error: %s", err.Error())
+            errorResponse := errors.NewErrorResponse(false, "500", errorMessage)
+            errorJsonResponse, jsonErr := json.MarshalIndent(errorResponse, "", "  ")
+            if jsonErr != nil {
+                fmt.Println("Error marshaling JSON:", jsonErr)
+                return
+            }
+            fmt.Println(string(errorJsonResponse))
+            return
         } else {
-            fmt.Println(resp)
+            successData := struct {
+                StatusCode int `json:"status_code"`
+            }{
+                StatusCode: statusCode,
+            }
+            successResponse := response.NewResponse(true, "200", "Ping successful", successData)
+            jsonResponse, jsonErr := json.MarshalIndent(successResponse, "", "  ")
+            if jsonErr != nil {
+                fmt.Println("Error marshaling JSON:", jsonErr)
+                return
+            }
+            fmt.Println(string(jsonResponse))
         }
     },
 }
 
-func ping(domain string) (int, error) {
-    url := "http://" + domain
+func ping(target string) (int, error) {
+    var url string
+
+    // Check if the target is an IP address
+    if ip := net.ParseIP(target); ip != nil {
+        // It's an IP address, so use it directly for pinging
+        url = "http://" + target
+    } else {
+        // It's not an IP address, assume it's a domain name
+        url = "http://" + target
+    }
+
     req, err := http.NewRequest("HEAD", url, nil)
     if err != nil {
         return 0, err
@@ -36,7 +69,7 @@ func ping(domain string) (int, error) {
     if err != nil {
         return 0, err
     }
-    defer resp.Body.Close()  // Ensure the response body is closed
+    defer resp.Body.Close()
 
     return resp.StatusCode, nil
 }
