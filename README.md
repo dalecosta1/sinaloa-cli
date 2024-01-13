@@ -99,8 +99,21 @@ After doing this, the cobra-cli command should be available in all new terminal 
 
 
 # Env
+
 It is necessary create an .env file:
+
 ```bash
 SINALOA_CLI_DEBUG="false" # true or false
 STORJ_SECRET="YOUR_SECRET" # Storj secret
 ```
+
+Now you can do:
+
+```bash
+cd scripts
+```
+```bash
+source set_env_var.sh
+```
+
+So you are able to set OS ENV variables before the execution of the sinaloa cli.
