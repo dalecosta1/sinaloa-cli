@@ -1,13 +1,13 @@
 #!/bin/bash
 
-# Usage: ./create_cmd.sh cmd_name subcmd_name "flag1|flag2|..." package_path
+# Usage: ./create_cmd.sh cmd_name subcmd_name package_path "flag1|flag2|..."
 
 set -e  # Exit on error
 
 CMD=$1
 SUBCMD=$2
-FLAGS=$3
-PACKAGE_PATH=$4
+PACKAGE_PATH=$3
+FLAGS=$4
 
 CMD_CAP="$(tr '[:lower:]' '[:upper:]' <<< ${CMD:0:1})${CMD:1}"
 SUBCMD_CAP="$(tr '[:lower:]' '[:upper:]' <<< ${SUBCMD:0:1})${SUBCMD:1}"

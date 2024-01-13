@@ -26,4 +26,4 @@ source "$temp_env_file"
 # Clean up the temporary file
 rm -f "$temp_env_file"
 
-echo "Environment variables from .env file have been added to the system."
+echo "[INFORMATION] Environment variables from '.env' file have been added to the system."

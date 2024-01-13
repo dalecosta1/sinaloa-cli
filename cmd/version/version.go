@@ -17,23 +17,6 @@ var VersionCmd = &cobra.Command{
     Run: func(cmd *cobra.Command, args []string) {
         // Load the config
 	    helpers.LoadConfig()
-        
-        // Check if the version is set
-        if helpers.AppConfig.VERSION == "" {
-            // Create a 404 error response
-            errorResponse := errors.NewErrorResponse(false, "404", "Version not found in environment")
-
-            // Marshal the error response into JSON with indentation
-            errorJsonResponse, err := json.MarshalIndent(errorResponse, "", "  ")
-            if err != nil {
-                fmt.Println("Error marshaling JSON:", err)
-                return
-            }
-
-            // Print the indented JSON error response
-            fmt.Println(string(errorJsonResponse))
-            return
-        }
 
         // Create the response
         versionResponse := response.NewResponse(true, "200", "", struct {
@@ -62,6 +45,4 @@ var VersionCmd = &cobra.Command{
     },
 }
 
-func init() {
-    // Add your code here.
-}
+func init() { }

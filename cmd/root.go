@@ -4,7 +4,6 @@ import (
     "os"
     "github.com/spf13/cobra"
     "github.com/dalecosta1/sinaloa-cli/cmd/haproxy"
-    "github.com/dalecosta1/sinaloa-cli/cmd/haproxy"
     "github.com/dalecosta1/sinaloa-cli/cmd/storj"
     "github.com/dalecosta1/sinaloa-cli/cmd/env"
     "github.com/dalecosta1/sinaloa-cli/cmd/net"
@@ -26,7 +25,6 @@ func Execute() {
 }
 
 func addSubcommandPalettes() {
-    rootCmd.AddCommand(haproxy.HaproxyCmd)
     rootCmd.AddCommand(haproxy.HaproxyCmd)
     rootCmd.AddCommand(storj.StorjCmd)
     rootCmd.AddCommand(env.EnvCmd)

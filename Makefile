@@ -1,5 +1,3 @@
-# Makefile for Go projects
-
 # Go variables
 GO := go
 PKG := github.com/dalecosta1/sinaloa-cli
@@ -40,9 +38,20 @@ add-env:
 	@cd scripts && chmod +x ./set_env_var.sh && . set_env_var.sh
 
 # Add a new command with a subcommand and dynamically add flags
-# Emaxple: make new-cmd cmd=storj subcmd=add flags="secret:secret:s:Storj secret to connect within:true:|path:path:p:Path where you want store the file on storj bucket:true:|file:file:f:Path of the file where is located:true:"
+# Example: make new-cmd cmd=storj subcmd=add flags="secret:secret:s:Storj secret to connect within:true:|path:path:p:Path where you want store the file on storj bucket:true:|file:file:f:Path of the file where is located:true:"
 new-cmd:
 	chmod +x ./scripts/create_cmd.sh
-	./scripts/create_cmd.sh $(cmd) $(subcmd) "$(flags)" "$(PKG)/cmd/$(cmd)"
+	./scripts/create_cmd.sh $(cmd) $(subcmd) "$(PKG)/cmd/$(cmd)" "$(flags)"
 
-.PHONY: all build test clean deps new-cmd
+# Add a new command with a subcommand and dynamically add flags
+# Example make new_sub cmd=storj subcmd=put flags="msg:msg:m:Message to receive:true:|path:path:p:Path where you want store the file on storj bucket:true:"
+new-sub:
+	chmod +x ./scripts/create_sub.sh
+	./scripts/create_cmd.sh $(cmd) $(subcmd) "$(PKG)/cmd/$(cmd)" "$(flags)"
+
+# Set the version of the project, used only to generate thefinal build of the cli
+set-version:
+	chmod +x ./scripts/set_version.sh
+	./scripts/set_version.sh
+
+.PHONY: all build test clean deps new-cmd new-sub set-version
