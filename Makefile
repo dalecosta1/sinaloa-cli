@@ -47,7 +47,7 @@ new-cmd:
 # Example make new_sub cmd=storj subcmd=put flags="msg:msg:m:Message to receive:true:|path:path:p:Path where you want store the file on storj bucket:true:"
 new-sub:
 	chmod +x ./scripts/create_sub.sh
-	./scripts/create_cmd.sh $(cmd) $(subcmd) "$(PKG)/cmd/$(cmd)" "$(flags)"
+	./scripts/create_sub.sh $(cmd) $(subcmd) "$(PKG)/cmd/$(cmd)" "$(flags)"
 
 # Set the version of the project, used only to generate thefinal build of the cli
 set-version:

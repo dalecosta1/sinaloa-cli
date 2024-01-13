@@ -1,15 +1,22 @@
 # SINALOA-CLI
-The devops CLI used for automation with delivery and integration processes.
+The devops CLI used for automations.
 
-# Go instalaltion
+
+# Go installation
 
 - MacOS
+```bash
 brew install golang
 export GOBIN=~/go/bin
 export PATH=$PATH:$GOBIN
+```
 
 - Ubuntu
-
+```bash
+sudo apt install golang
+export GOBIN=~/go/bin
+export PATH=$PATH:$GOBIN
+```
 
 # Fix inside env. cobra-cli and go path
 
@@ -75,3 +82,25 @@ After doing this, the cobra-cli command should be available in all new terminal 
 - go get gopkg.in/yaml.v2
 - cobra-cli init <cli_name> (to create cli)
 - cobra-cli add <name_cmd> (to create a new command)
+
+
+# Development
+
+- Install required
+- Install deps
+
+
+# Debug usage
+
+
+
+# Makefile
+
+
+
+# Env
+It is necessary create an .env file:
+```bash
+SINALOA_CLI_DEBUG="false" # true or false
+STORJ_SECRET="YOUR_SECRET" # Storj secret
+```
