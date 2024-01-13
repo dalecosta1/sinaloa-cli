@@ -25,6 +25,7 @@ vendor/
 
 # Local binary
 bin/
+build
 
 # Log files
 *.log

@@ -11,19 +11,33 @@ all: build
 # Build the executable
 build:
 	$(GO) build -o sinaloa $(MAIN_FILE)
-
-# Run tests
-test:
-	$(GO) test ./...
+	@file="sinaloa"; \
+	folder="build"; \
+	if [ ! -d "$$folder" ]; then \
+		mkdir -p "$$folder"; \
+	fi; \
+	mv "$$file" "$$folder/"
 
 # Clean build artifacts
-clean:
+build-clean:
 	$(GO) clean
-	rm -f sinaloa
+	rm -rf build
 
 # Install dependencies
 deps:
 	$(GO) get -v -t -d ./...
+
+# Cleans up the module's go.mod and go.sum
+mod-tidy:
+	$(GO) mod tidy
+
+# Run tests
+test:
+	@cd tests && $(GO) test ./...
+
+# Add env vars from .env file
+add-env:
+	@cd scripts && chmod +x ./set_env_var.sh && . set_env_var.sh
 
 # Add a new command with a subcommand and dynamically add flags
 # Emaxple: make new-cmd cmd=storj subcmd=add flags="secret:secret:s:Storj secret to connect within:true:|path:path:p:Path where you want store the file on storj bucket:true:|file:file:f:Path of the file where is located:true:"

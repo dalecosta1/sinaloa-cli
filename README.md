@@ -70,5 +70,8 @@ After doing this, the cobra-cli command should be available in all new terminal 
 - go get -u "github.com/ricochet2200/go-disk-usage/du"
 - go get -u "github.com/dalecosta1/sinaloa-cli/cmd/info/sub/diskusage"
 - go get -u storj.io/uplink
+- go get github.com/stretchr/testify/assert
+- go get github.com/stretchr/testify/mock@v1.8.4
+- go get gopkg.in/yaml.v2
 - cobra-cli init <cli_name> (to create cli)
 - cobra-cli add <name_cmd> (to create a new command)
